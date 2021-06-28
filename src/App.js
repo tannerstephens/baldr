@@ -1,9 +1,18 @@
 import React, { Component } from 'react';
 
 class App extends Component {
-  state = {  }
+  state = { releases: {} }
+
+  componentDidMount() {
+    fetch('https://api.pullist.net/v1/releases')
+      .then(response => response.json())
+      .then(data => this.setState({
+        releases: data
+      }));
+  }
+
   render() {
-    return <div>Hello World</div>;
+    return <div>{JSON.stringify(this.state.releases)}</div>;
   }
 }
 
